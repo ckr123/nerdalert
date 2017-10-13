@@ -38,7 +38,7 @@ defmodule Nerdalert.Mixfile do
   end
   def application(_target) do
     [mod: {Nerdalert.Application, []},
-     extra_applications: [:logger]]
+     extra_applications: [:logger, :nerves_neopixel, :httpoison]]
   end
 
   # Dependencies can be Hex packages:
@@ -51,7 +51,11 @@ defmodule Nerdalert.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   def deps do
-    [{:nerves, "~> 0.7", runtime: false}] ++
+    [
+      {:nerves, "~> 0.7", runtime: false},
+      {:httpoison, "~> 0.13"},
+      {:poison, "~> 3.1"}
+    ] ++
     deps(@target)
   end
 
@@ -60,7 +64,11 @@ defmodule Nerdalert.Mixfile do
   def deps(target) do
     [
       {:bootloader, "~> 0.1"},
-      {:nerves_runtime, "~> 0.4"}
+      {:nerves_runtime, "~> 0.4"},
+      {:nerves_network, "~> 0.3.3"},
+      {:nerves_network_interface, "~> 0.4.2"},
+      {:nerves_neopixel, "~> 0.3.1"},
+      {:nerves_firmware_ssh, "~> 0.2.2"},
     ] ++ system(target)
   end
 
